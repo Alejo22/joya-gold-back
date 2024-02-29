@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.icfes.joyagold.controller.DomainController;
+import com.icfes.joyagold.data.model.Archetype;
 import com.icfes.joyagold.data.model.Material;
 import com.icfes.joyagold.service.DomainService;
 
@@ -18,6 +19,11 @@ public class DomainControllerImpl  implements DomainController{
     @Override
     public List<Material> getMaterials() {
         return this.domainService.getAllMaterials();
+    }
+
+    @Override
+    public List<Archetype> getArchetypes() {
+        return this.domainService.getAllArchetypes();
     }
 
 }

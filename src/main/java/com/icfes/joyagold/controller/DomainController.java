@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.icfes.joyagold.data.model.Archetype;
 import com.icfes.joyagold.data.model.Material;
 
 @RequestMapping(DomainController.PATH_BASE)
@@ -14,4 +15,7 @@ public interface DomainController {
 
     @GetMapping("/materials")
     public List<Material> getMaterials();
+
+    @GetMapping("/archetypes")
+    public List<Archetype> getArchetypes();
 }
