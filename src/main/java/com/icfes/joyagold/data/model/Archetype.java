@@ -14,6 +14,7 @@ import lombok.EqualsAndHashCode;
 @Entity
 @Table(name = "archetype")
 public class Archetype {
+	
     @Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "archetype_id", nullable = false)

@@ -3,8 +3,7 @@ package com.icfes.joyagold.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.icfes.joyagold.data.model.Material;
+import com.icfes.joyagold.data.model.Product;
 
 @Repository
-public interface MaterialRepository extends JpaRepository<Material, Integer> {
-}
+public interface ProductRepository extends JpaRepository<Product, Integer> {}
