@@ -1,12 +1,14 @@
 package com.icfes.joyagold.service.impl;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.icfes.joyagold.data.model.Archetype;
-import com.icfes.joyagold.data.model.Material;
+import com.icfes.joyagold.data.dto.ArchetypeDTO;
+import com.icfes.joyagold.data.dto.MaterialDTO;
+import com.icfes.joyagold.data.factory.DomainFactory;
 import com.icfes.joyagold.repository.ArchetypeRepository;
 import com.icfes.joyagold.repository.MaterialRepository;
 import com.icfes.joyagold.service.DomainService;
@@ -21,13 +23,13 @@ public class DomainServiceImpl  implements DomainService {
     private ArchetypeRepository archetypeRepository;
 
     @Override
-    public List<Material> getAllMaterials() {
-        return this.materialRepository.findAll();
+    public List<MaterialDTO> getAllMaterials() {
+        return this.materialRepository.findAll().stream().map( material -> DomainFactory.entityToDTO(material)).collect(Collectors.toList());
     }
 
     @Override
-    public List<Archetype> getAllArchetypes() {
-        return this.archetypeRepository.findAll();
+    public List<ArchetypeDTO> getAllArchetypes() {
+        return this.archetypeRepository.findAll().stream().map( archetype -> DomainFactory.entityToDTO(archetype)).collect(Collectors.toList());
     }
 
 }

@@ -2,10 +2,10 @@ package com.icfes.joyagold.service;
 
 import java.util.List;
 
-import com.icfes.joyagold.data.model.Archetype;
-import com.icfes.joyagold.data.model.Material;
+import com.icfes.joyagold.data.dto.ArchetypeDTO;
+import com.icfes.joyagold.data.dto.MaterialDTO;
 
 public interface DomainService {
-    public List<Material> getAllMaterials();
-    public List<Archetype> getAllArchetypes();
+    public List<MaterialDTO> getAllMaterials();
+    public List<ArchetypeDTO> getAllArchetypes();
 }
