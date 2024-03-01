@@ -42,11 +42,11 @@ public class Product {
     @Column(name = "prod_price", nullable = false)
 	private BigDecimal price;
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "prod_mat_id")
 	private Material material;
 
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "prod_archetype_id")
 	private Archetype archetype;
 

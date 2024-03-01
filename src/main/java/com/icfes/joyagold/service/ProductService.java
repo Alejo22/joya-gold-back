@@ -2,10 +2,10 @@ package com.icfes.joyagold.service;
 
 import java.util.List;
 
-import com.icfes.joyagold.data.model.Product;
+import com.icfes.joyagold.data.dto.ProductDTO;
 
 public interface ProductService {
-    public Product getById(Integer id);
-    public List<Product> getAll();
-    public void saveOrUpdate(Product product);
+    public ProductDTO getById(Integer id);
+    public List<ProductDTO> getAll();
+    public void saveOrUpdate(ProductDTO product);
 }
