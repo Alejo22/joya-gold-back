@@ -17,8 +17,18 @@ public class ProductControllerImpl  implements ProductController {
     private ProductService productService;
 
     @Override
-    public void create(ProductDTO product) {
-        this.productService.saveOrUpdate(product);
+    public void create(ProductDTO productDTO) {
+        this.productService.create(productDTO);
+    }
+
+    @Override
+    public void update(ProductDTO productDTO) {
+        this.productService.update(productDTO);
+    }
+
+    @Override
+    public void delete(Integer productId) {
+        this.productService.delete(productId);
     }
 
     @Override
@@ -30,5 +40,4 @@ public class ProductControllerImpl  implements ProductController {
     public ResponseEntity<List<ProductDTO>> getAll() {
         return ResponseEntity.ok(this.productService.getAll());
     }
-
 }

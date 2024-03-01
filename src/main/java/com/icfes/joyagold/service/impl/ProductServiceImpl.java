@@ -32,32 +32,8 @@ public class ProductServiceImpl  implements ProductService {
     ArchetypeRepository archetypeRepository;
 
     @Override
-    public void saveOrUpdate(ProductDTO productDTO) {
-        if( productDTO.getId() != null && productDTO.getId() > 0){
-            this.productRepository.save(this.update(productDTO));
-        }else{
-            this.productRepository.save(this.save(productDTO));
-        }
-    }
+    public void create(ProductDTO productDTO) {
 
-    @Override
-    public ProductDTO getById(Integer id) {
-        Product product = this.productRepository.findById(id)
-            .orElseThrow( () -> new ResourceNotFoundException("id", "Product", id.toString(), ErrorCodeEnum.NOT_FOUND_RESOURCE.getValue()) );
-        
-        return ProductFactory.entityToDTO(product);
-    }
-
-    @Override
-    public List<ProductDTO> getAll() {
-        return this.productRepository.findAll()
-            .stream()
-            .map( product -> ProductFactory.entityToDTO(product ))
-            .collect(Collectors.toList());
-    }
-
-    private Product save(ProductDTO productDTO){
-        
         Integer materialId = productDTO.getMaterialId();
         Material material = this.materialRepository.findById(materialId)
             .orElseThrow( () -> new ResourceNotFoundException("id", "Material", materialId.toString(), ErrorCodeEnum.NOT_FOUND_RESOURCE.getValue()) );
@@ -74,11 +50,21 @@ public class ProductServiceImpl  implements ProductService {
         newProduct.setCreationDate(creationDate);
         newProduct.setUpdateDate(creationDate);
 
-        return newProduct;
+        this.productRepository.save(newProduct);
     }
 
-    private Product update(ProductDTO productDTO){
+    @Override
+    public void delete(Integer productId) {
 
+        Product product = this.productRepository.findById(productId)
+            .orElseThrow( () -> new ResourceNotFoundException("id", "Product", productId.toString(), ErrorCodeEnum.NOT_FOUND_RESOURCE.getValue()) );
+
+        this.productRepository.delete(product);
+    }
+
+    @Override
+    public void update(ProductDTO productDTO) {
+        
         Integer id = productDTO.getId();
 
         Product product = this.productRepository.findById(id)
@@ -94,6 +80,22 @@ public class ProductServiceImpl  implements ProductService {
         Date creationDate = new Date();
         product.setUpdateDate(creationDate);
 
-        return product;
+        this.productRepository.save(product);
+    }
+
+    @Override
+    public ProductDTO getById(Integer id) {
+        Product product = this.productRepository.findById(id)
+            .orElseThrow( () -> new ResourceNotFoundException("id", "Product", id.toString(), ErrorCodeEnum.NOT_FOUND_RESOURCE.getValue()) );
+        
+        return ProductFactory.entityToDTO(product);
+    }
+
+    @Override
+    public List<ProductDTO> getAll() {
+        return this.productRepository.findAll()
+            .stream()
+            .map( product -> ProductFactory.entityToDTO(product ))
+            .collect(Collectors.toList());
     }
 }
