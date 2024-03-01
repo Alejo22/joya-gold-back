@@ -3,6 +3,7 @@ package com.icfes.joyagold.controller.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,13 +18,13 @@ public class ProductControllerImpl  implements ProductController {
     private ProductService productService;
 
     @Override
-    public void create(ProductDTO productDTO) {
-        this.productService.create(productDTO);
+    public ResponseEntity<ProductDTO> create(ProductDTO productDTO) {
+        return new ResponseEntity<ProductDTO>(this.productService.create(productDTO), HttpStatus.CREATED);
     }
 
     @Override
-    public void update(ProductDTO productDTO) {
-        this.productService.update(productDTO);
+    public ResponseEntity<ProductDTO> update(ProductDTO productDTO) {
+        return ResponseEntity.ok(this.productService.update(productDTO));
     }
 
     @Override

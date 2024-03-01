@@ -32,7 +32,7 @@ public class ProductServiceImpl  implements ProductService {
     ArchetypeRepository archetypeRepository;
 
     @Override
-    public void create(ProductDTO productDTO) {
+    public ProductDTO create(ProductDTO productDTO) {
 
         Integer materialId = productDTO.getMaterialId();
         Material material = this.materialRepository.findById(materialId)
@@ -50,20 +50,11 @@ public class ProductServiceImpl  implements ProductService {
         newProduct.setCreationDate(creationDate);
         newProduct.setUpdateDate(creationDate);
 
-        this.productRepository.save(newProduct);
+        return ProductFactory.entityToDTO(this.productRepository.save(newProduct));
     }
 
     @Override
-    public void delete(Integer productId) {
-
-        Product product = this.productRepository.findById(productId)
-            .orElseThrow( () -> new ResourceNotFoundException("id", "Product", productId.toString(), ErrorCodeEnum.NOT_FOUND_RESOURCE.getValue()) );
-
-        this.productRepository.delete(product);
-    }
-
-    @Override
-    public void update(ProductDTO productDTO) {
+    public ProductDTO update(ProductDTO productDTO) {
         
         Integer id = productDTO.getId();
 
@@ -80,7 +71,16 @@ public class ProductServiceImpl  implements ProductService {
         Date creationDate = new Date();
         product.setUpdateDate(creationDate);
 
-        this.productRepository.save(product);
+        return ProductFactory.entityToDTO(this.productRepository.save(product));
+    }
+
+    @Override
+    public void delete(Integer productId) {
+
+        Product product = this.productRepository.findById(productId)
+            .orElseThrow( () -> new ResourceNotFoundException("id", "Product", productId.toString(), ErrorCodeEnum.NOT_FOUND_RESOURCE.getValue()) );
+
+        this.productRepository.delete(product);
     }
 
     @Override
