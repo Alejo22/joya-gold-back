@@ -21,7 +21,7 @@ public class ProductDTO {
 	private Integer weight;
 	private BigDecimal price;
 	private String color;
-	private Integer materiaId;
+	private Integer materialId;
 	private MaterialDTO material;
 	private Integer archetypeId;
 	private ArchetypeDTO archetype;

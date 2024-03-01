@@ -21,4 +21,17 @@ public class ProductFactory {
             .build();
     }
 
+    public static Product DTOToEntity(ProductDTO productDTO){
+        if( productDTO == null){
+            return new Product();
+        }
+
+        return Product.builder()
+            .name(productDTO.getName())
+            .weight(productDTO.getWeight())
+            .price(productDTO.getPrice())
+            .color(productDTO.getColor())
+            .build();
+    }
+
 }
